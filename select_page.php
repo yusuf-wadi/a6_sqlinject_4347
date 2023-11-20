@@ -3,7 +3,7 @@ $host="localhost";
 $port=3306;
 $socket="MySQL";
 $user="root";
-$password="";
+$password="bluellama1";
 $dbname="aixhibit";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -13,8 +13,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $conn = new mysqli($host, $user, $password, $dbname, $port, $socket)
 	    or die ('Could not connect to the database server' . mysqli_connect_error());
 
-    $sql = "SELECT ArtistName FROM artists WHERE ArtistName = '$name'";
-    $result = $conn->query($sql);
+    $stmt = $conn->prepare("SELECT * FROM artists WHERE ArtistName = ?");
+    $stmt->bind_param("s", $name);
+    $stmt->execute();
+    $result = $stmt->get_result();
     
     if ($result) {
         echo "<h2>Results:</h2>";
