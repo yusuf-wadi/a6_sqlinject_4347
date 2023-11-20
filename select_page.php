@@ -1,5 +1,5 @@
 <?php
-$host="127.0.0.1";
+$host="localhost";
 $port=3306;
 $socket="MySQL";
 $user="root";
@@ -13,10 +13,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $conn = new mysqli($host, $user, $password, $dbname, $port, $socket)
 	    or die ('Could not connect to the database server' . mysqli_connect_error());
 
-    $sql = "SELECT * FROM artists WHERE ArtistName = '$name'";
+    $sql = "SELECT ArtistName FROM artists WHERE ArtistName = '$name'";
     $result = $conn->query($sql);
-    echo "<h2>Results:</h2>";
+    
     if ($result) {
+        echo "<h2>Results:</h2>";
         // Fetch all rows as an associative array
         $rows = $result->fetch_all(MYSQLI_ASSOC);
     
@@ -34,7 +35,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         echo "Error: " . $mysqli->error;
     }
     
-    // Close the connection
-    $mysqli->close();
+    
 }
+// Close the connection
+$mysqli->close();
 ?>
