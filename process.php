@@ -1,9 +1,9 @@
 <?php
-$host="localhost";
+$host="127.0.0.1";
 $port=3306;
-$socket="";
+$socket="MySQL";
 $user="root";
-$password="";
+$password="bluellama1";
 $dbname="aixhibit";
 
 $con = new mysqli($host, $user, $password, $dbname, $port, $socket)
@@ -11,7 +11,6 @@ $con = new mysqli($host, $user, $password, $dbname, $port, $socket)
 
 echo 'Connected successfully';
 
-
-
+$con->close();
 
 ?>
